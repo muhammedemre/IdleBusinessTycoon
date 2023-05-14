@@ -24,7 +24,6 @@
 
     public override void LevelReadyToPlayProcess()
     {
-        print("LevelReadyToPlayProcess()_LevelManager");
         GameManager.instance.gameManagerUpdateFollowOfficer.updateOn = true;
     }
 

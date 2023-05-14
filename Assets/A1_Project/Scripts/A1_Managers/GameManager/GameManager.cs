@@ -11,7 +11,14 @@ public class GameManager : SerializedMonoBehaviour
     [SerializeField] private float preGameStartDelay;
     public ObserverSubjects currentGameState = (ObserverSubjects)0;
 
+    public ScreenState currentGameScreen = ScreenState.SplashScreen;
+
     public string gameName;
+
+    public enum ScreenState
+    {
+        SplashScreen, LandingMenuScreen, MapScreen, ShopScreen
+    }
 
     private void Awake()
     {

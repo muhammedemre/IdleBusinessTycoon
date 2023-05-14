@@ -8,12 +8,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 651434681857824470, guid: 0870bc3d0b018b4499d9303981e71e22, type: 3}
+      propertyPath: mapVerticalSize
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 651434681857824470, guid: 0870bc3d0b018b4499d9303981e71e22, type: 3}
+      propertyPath: mapHorizontalSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 651434681857824470, guid: 0870bc3d0b018b4499d9303981e71e22, type: 3}
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 651434681857824470, guid: 0870bc3d0b018b4499d9303981e71e22, type: 3}
     - target: {fileID: 7697283916757276176, guid: 0870bc3d0b018b4499d9303981e71e22, type: 3}
       propertyPath: m_Name
-      value: LevelPrefab
+      value: Level0
       objectReference: {fileID: 0}
     - target: {fileID: 7697283916757276396, guid: 0870bc3d0b018b4499d9303981e71e22, type: 3}
       propertyPath: m_RootOrder

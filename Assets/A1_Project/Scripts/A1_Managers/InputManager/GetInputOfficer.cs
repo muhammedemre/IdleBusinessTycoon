@@ -7,26 +7,26 @@ using UnityEngine.EventSystems;
 public class GetInputOfficer : SerializedMonoBehaviour
 {
     public bool touchable = false;
-    
+
     private bool previousMouseState = false;
     [SerializeField] private bool isFixedUpdate = false;
-    
+
     public delegate void InputTypeProcess(bool touchStart, bool touchMoved, bool touchEnded, Vector2 touchPos);
 
     //public event InputTypeProcess InputDrag;
     //public event InputTypeProcess InputHold;
     //public event InputTypeProcess InputSwipe;
-    public event InputTypeProcess InputSlide;
+    //public event InputTypeProcess InputSlide;
     public event InputTypeProcess InputTouch;
     //public event InputTypeProcess InputJoystick;
 
     [SerializeField] int UILayer;
-    
+
     private void Update()
     {
         if (!isFixedUpdate && touchable)
         {
-            InputControl(); 
+            InputControl();
         }
     }
 
@@ -43,7 +43,7 @@ public class GetInputOfficer : SerializedMonoBehaviour
         {
             TouchInput();
         }
-        else 
+        else
         {
             MouseInput();
         }
@@ -53,6 +53,10 @@ public class GetInputOfficer : SerializedMonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
+            if (CheckOnUIClick())
+            {
+                return;
+            }
             if (previousMouseState == false)
             {
                 previousMouseState = true;
@@ -68,7 +72,7 @@ public class GetInputOfficer : SerializedMonoBehaviour
             if (previousMouseState == true)
             {
                 previousMouseState = false;
-                InputManagerInjector(false, false, true, Vector2.zero);
+                InputManagerInjector(false, false, true, Input.mousePosition);
             }
         }
     }
@@ -76,6 +80,10 @@ public class GetInputOfficer : SerializedMonoBehaviour
     {
         if (Input.touchCount > 0)
         {
+            if (CheckOnUIClick())
+            {
+                return;
+            }
             Touch touch = Input.GetTouch(0);
             if (touch.phase == TouchPhase.Began)
             {
@@ -98,7 +106,35 @@ public class GetInputOfficer : SerializedMonoBehaviour
 
     void InputManagerInjector(bool touchStart, bool touchMoved, bool touchEnded, Vector2 touchPos)
     {
-        InputSlide(touchStart, touchMoved, touchEnded, touchPos);
+        InputTouch(touchStart, touchMoved, touchEnded, touchPos);
+    }
+
+    bool CheckOnUIClick()
+    {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            if (IsPointerOverUIObject())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool IsPointerOverUIObject()
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        foreach (RaycastResult result in results)
+        {
+            if (result.gameObject.tag == "NoTouchUI")
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

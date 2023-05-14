@@ -17,7 +17,6 @@ public class GameManagerUpdateFollowOfficer : MonoBehaviour
         if (nextUpdate < Time.time && updateOn)
         {
             nextUpdate = Time.time + updateFrequency;
-            print("UPDATE FOLLOW : "+nextUpdate);
             GameManager.instance.gameManagerObserverOfficer.Publish(ObserverSubjects.UpdateFollow);
         }
     }

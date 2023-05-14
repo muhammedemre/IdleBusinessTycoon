@@ -7,7 +7,6 @@ public class CameraManager : Manager
 
     public override void PostLevelInstantiateProcess()
     {
-        print("StartPositioning");
         cameraMoveOfficer.StartPositioning();
     }
 

@@ -1,22 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
+using System;
 
-public abstract class Item : MonoBehaviour
+
+public abstract class Item : SerializedMonoBehaviour
 {
+    public ItemObserverOfficer itemObserverOfficer;
+
     public int id;
     public string name;
-    public float healt;
+    public ItemTypes itemType;
+    public float health;
+    public int leftLifeTime, lifeDuration;
+    public DateTime producedTime, deathTime;
 
-    public float producedTime, leftLifeTime;
 
-    public Item() 
+    public void Start()
     {
-        Produced(Time.time);
+        Produced(DateTime.Now);
+        //print("producedTime: "+producedTime + " deathTime: "+deathTime);
     }
 
-    void Produced(float time) 
+    void Produced(DateTime date)
     {
-        producedTime = time;
+        producedTime = date;
+        deathTime = producedTime.AddSeconds(lifeDuration);
     }
 }

@@ -8,7 +8,7 @@ public class InputSlideOfficer : MonoBehaviour
     public float moveRate = 0f, moveBoostRate = 1;
     private void Start()
     {
-        InputManager.instance.getInputOfficer.InputSlide += InputSlideProcess;
+        //InputManager.instance.getInputOfficer.InputSlide += InputSlideProcess;
         screenWidth = Screen.width;
     }
 
